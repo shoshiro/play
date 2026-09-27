@@ -13,6 +13,7 @@
  *   VeshiroSeal.svg()                                    // house seal
  *   VeshiroSeal.svg({ variant: 'mark' })                 // no text ring
  *   VeshiroSeal.svg({ item: 'Nightfall', edition: 1 })   // edition seal
+ *   VeshiroSeal.svg({ house: 'Deshar' })                 // any other house name
  *
  * Works in the browser (window.VeshiroSeal) and in Node (require).
  */
@@ -118,7 +119,9 @@
     var edition = opts.edition != null ? Number(opts.edition) : null;
     var id = 'vs' + (++uid) + Math.random().toString(36).slice(2, 6);
 
-    var house = points(HOUSE);
+    var houseName = opts.house ? String(opts.house).toUpperCase() : HOUSE;
+    var motto = opts.motto ? String(opts.motto).toUpperCase() : MOTTO;
+    var house = points(houseName);
     var piece = item ? points(item) : [];
     var used = {};
     house.forEach(function (p) { used[p.ch] = 'house'; });
@@ -136,8 +139,8 @@
       parts.push('<circle cx="0" cy="0" r="' + R_OUTER_2 + '" fill="none" stroke="' + ink + '" stroke-width="' + hair + '"/>');
 
       var unit = item
-        ? HOUSE + '  ·  Nº ' + pad(edition == null ? 1 : edition) + '  ·  ' + letters(item).join('') + '  ·  '
-        : HOUSE + '  ·  ' + MOTTO + '  ·  EST. ' + FOUNDED + '  ·  ';
+        ? houseName + '  ·  Nº ' + pad(edition == null ? 1 : edition) + '  ·  ' + letters(item).join('') + '  ·  '
+        : houseName + '  ·  ' + motto + '  ·  EST. ' + FOUNDED + '  ·  ';
       // Repeat the legend until it roughly fills the ring, then let
       // textLength close the last small gap so the spacing stays even.
       var label = unit;
@@ -178,7 +181,7 @@
 
     var attrs = 'xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200"';
     if (size) attrs += ' width="' + size + '" height="' + size + '"';
-    var title = item ? HOUSE + ' seal, Nº ' + pad(edition == null ? 1 : edition) + ', ' + item : HOUSE + ' house seal';
+    var title = item ? houseName + ' seal, Nº ' + pad(edition == null ? 1 : edition) + ', ' + item : houseName + ' house seal';
     return '<svg ' + attrs + ' role="img" aria-label="' + escapeXml(title) + '"><title>' + escapeXml(title) + '</title>' + parts.join('') + '</svg>';
   }
 
