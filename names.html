@@ -6,7 +6,7 @@
 <title>Family Name Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Marcellus&family=Playfair+Display:wght@600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Prata&family=Tenor+Sans&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <style>
   /* One deliberate look: oxblood lacquer and gold, in every theme. */
   :root {
@@ -27,8 +27,8 @@
     --display: 'Marcellus', 'Trajan Pro', Georgia, serif;
     --text: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   }
-  :root[data-font="cinzel"] { --display: 'Cinzel', 'Trajan Pro', Georgia, serif; }
-  :root[data-font="playfair"] { --display: 'Playfair Display', Georgia, serif; }
+  :root[data-font="prata"] { --display: 'Prata', 'Didot', Georgia, serif; }
+  :root[data-font="tenor"] { --display: 'Tenor Sans', 'Optima', 'Gill Sans', sans-serif; }
 
   * { box-sizing: border-box; }
   body {
@@ -42,8 +42,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 70rem; margin: 0 auto; padding-inline: clamp(16px, 5vw, 48px); }
-  h1, h2 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; }
-  :root[data-font="marcellus"] h1, :root[data-font="marcellus"] h2 { font-weight: 400; }
+  h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
   p { margin: 0; max-width: 62ch; }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
@@ -61,9 +60,12 @@
   .seg button[aria-pressed="true"] { background: var(--gold); color: var(--oxblood-deep); font-weight: 600; }
   .seg button:not([aria-pressed="true"]):hover { color: var(--ivory); }
   .seg .f-marcellus { font-family: 'Marcellus', Georgia, serif; }
-  .seg .f-cinzel { font-family: 'Cinzel', Georgia, serif; }
-  .seg .f-playfair { font-family: 'Playfair Display', Georgia, serif; }
+  .seg .f-prata { font-family: 'Prata', Georgia, serif; }
+  .seg .f-tenor { font-family: 'Tenor Sans', 'Optima', sans-serif; }
 
+  .round { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1rem; padding-top: 2.5rem; }
+  .round h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+  .round p { color: var(--ivory-2); }
   .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; padding-block: 2rem 3rem; }
   .card {
     background: radial-gradient(130% 110% at 85% 0%, var(--oxblood) 0%, var(--oxblood-deep) 72%);
@@ -86,8 +88,6 @@
     letter-spacing: 0.16em;
     white-space: nowrap;
   }
-  :root[data-font="playfair"] .wm { font-weight: 700; letter-spacing: 0.1em; }
-  :root[data-font="cinzel"] .wm { font-weight: 600; }
   .say { color: var(--ivory-2); font-size: 1rem; }
   .say b { color: var(--ivory); font-weight: 600; }
   .map { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -133,18 +133,21 @@
   <header class="intro">
     <span class="label">Name studio</span>
     <h1>A house named for Daniel, Ester and Shoshi.</h1>
-    <p>Each name below is built from your family's names, and each one draws its own seal. Here they're shown in oxblood and gold. Switch the font to compare the three sturdier typefaces, or type your own idea into the last card.</p>
+    <p>Every name here is built from your family's names, and each one draws its own seal. Round two has ten new names. Round one is still below for comparison. Switch the font to compare Marcellus with two alternatives, or type your own idea into the last card.</p>
   </header>
 
   <div class="controls">
     <span class="label">Font</span>
     <div class="seg" role="group" aria-label="Wordmark font">
       <button type="button" class="f-marcellus" data-font="marcellus" aria-pressed="true">Marcellus</button>
-      <button type="button" class="f-cinzel" data-font="cinzel" aria-pressed="false">Cinzel</button>
-      <button type="button" class="f-playfair" data-font="playfair" aria-pressed="false">Playfair</button>
+      <button type="button" class="f-prata" data-font="prata" aria-pressed="false">Prata</button>
+      <button type="button" class="f-tenor" data-font="tenor" aria-pressed="false">Tenor Sans</button>
     </div>
   </div>
 
+  <div class="round"><h2>Round two</h2><p>Ten new names, all searched</p></div>
+  <div class="grid" id="grid2"></div>
+  <div class="round"><h2>Round one</h2><p>The first seven, plus a card to try your own</p></div>
   <div class="grid" id="grid"></div>
 
   <section class="palette" aria-labelledby="pal">
@@ -171,8 +174,8 @@
 
   var FONTS = {
     marcellus: "'Marcellus', Georgia, serif",
-    cinzel: "'Cinzel', Georgia, serif",
-    playfair: "'Playfair Display', Georgia, serif"
+    prata: "'Prata', Georgia, serif",
+    tenor: "'Tenor Sans', 'Optima', sans-serif"
   };
 
   var names = [
@@ -220,7 +223,71 @@
     }
   ];
 
+  var round2 = [
+    {
+      name: 'Eshdor', say: 'esh-<b>DOR</b>',
+      map: [['ESH', 'Ester, Shoshi'], ['D', 'Daniel'], ['OR', 'light, gold']],
+      why: 'Esh (אש) is fire and dor (דור) is a generation: a fire passed from one generation to the next. Or means light in Hebrew and gold in French.',
+      status: ['ok', 'No brand found using it']
+    },
+    {
+      name: 'Deshor', say: 'deh-<b>SHOR</b>',
+      map: [['D', 'Daniel'], ['E', 'Ester'], ['SH', 'Shoshi'], ['OR', 'light, gold']],
+      why: 'DESH with or at the end: your family, plus light (אור) and gold. It still shortens to "Desh".',
+      status: ['ok', 'No brand found using it']
+    },
+    {
+      name: 'Shoresh', say: 'sho-<b>RESH</b>',
+      map: [['SH', 'Shoshi'], ['R', 'Rushnevsky'], ['E', 'Ester'], ['SH', '']],
+      why: 'Hebrew for "root" (שורש): a house built on family roots. It\'s a real word, though, and Daniel isn\'t in it.',
+      status: ['warn', 'A wine label from Tzora Vineyards uses it']
+    },
+    {
+      name: 'Ordane', say: 'or-<b>DAHN</b>',
+      map: [['OR', 'light, gold'], ['DAN', 'Daniel'], ['E', 'Ester']],
+      why: 'Soft and French-sounding: "gold of Daniel". Shoshi isn\'t in the letters.',
+      status: ['warn', 'Small uses: a musician and one fashion capsule']
+    },
+    {
+      name: 'Daresh', say: 'dah-<b>RESH</b>',
+      map: [['DA', 'Daniel'], ['R', 'Rushnevsky'], ['E', 'Ester'], ['SH', 'Shoshi']],
+      why: 'All four of you, in a different order. Close to the Hebrew darash (דרש), "to seek".',
+      status: ['warn', 'A German fantasy book series has this title']
+    },
+    {
+      name: 'Shedan', say: 'sheh-<b>DAHN</b>',
+      map: [['SH', 'Shoshi'], ['E', 'Ester'], ['DAN', 'Daniel']],
+      why: 'Mother first, then the children. Two easy syllables.',
+      status: ['warn', 'A Tunisian essential-oils producer, since 1944']
+    },
+    {
+      name: 'Esdani', say: 'es-<b>DAH</b>-nee',
+      map: [['ES', 'Ester, Shoshi'], ['DANI', 'Daniel']],
+      why: 'Italian-sounding and warm, like a jeweller\'s surname.',
+      status: ['warn', 'A Dutch accounting firm and an exam-kit shop']
+    },
+    {
+      name: 'Lilastra', say: 'lee-<b>LAS</b>-trah',
+      map: [['LIL', 'Shoshana, "lily"'], ['ASTRA', 'Ester, "star"']],
+      why: 'Lily and star, from the meanings of Shoshana and Ester. Daniel isn\'t in it.',
+      status: ['warn', 'A small indie game studio']
+    },
+    {
+      name: 'Destelle', say: 'deh-<b>STELL</b>',
+      map: [['D', 'Daniel'], ['ESTELLE', 'Ester, "star"']],
+      why: 'Daniel plus Ester\'s star. Very couture, but Shoshi isn\'t in it.',
+      status: ['warn', 'A Jonak Paris shoe and the watch brand DESTELL']
+    },
+    {
+      name: 'Esdoré', say: 'es-doh-<b>RAY</b>',
+      map: [['ES', 'Ester, Shoshi'], ['D', 'Daniel'], ['ORÉ', 'gold']],
+      why: 'Sounds like the French est doré, "is golden". The best wordplay of the set.',
+      status: ['bad', 'Too close to Esdor, a skincare brand']
+    }
+  ];
+
   var grid = document.getElementById('grid');
+  var grid2 = document.getElementById('grid2');
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -248,6 +315,7 @@
 
   var tryValue = 'Deshar';
   function render() {
+    grid2.innerHTML = round2.map(cardHTML).join('');
     grid.innerHTML = names.map(cardHTML).join('') +
       '<article class="card muted" id="try-card">' +
         '<div class="seal" id="try-seal">' + sealFor(tryValue) + '</div>' +
