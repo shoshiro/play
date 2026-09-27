@@ -3,172 +3,154 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VESHIRO</title>
-<meta name="description" content="The house of Veshiro. Each piece, signed.">
-<meta property="og:title" content="VESHIRO">
+<title>RESYTAL</title>
+<meta name="description" content="The house of Resytal. Each piece, signed.">
+<meta property="og:title" content="RESYTAL">
 <meta property="og:description" content="Each piece, signed.">
 <meta property="og:image" content="export/og-1200x630.png">
-<meta name="theme-color" content="#1F4A43">
+<meta name="theme-color" content="#1A0A0E">
 <link rel="icon" href="export/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <style>
   :root {
-    --ground: #ECEDE8;
-    --ink: #16201E;
-    --muted: #55625E;
-    --line: rgba(22, 32, 30, 0.16);
-    --gilt: #8E703D;
-    --lacquer: #1F4A43;
-    --lacquer-deep: #173833;
-    --on-lacquer: #ECE8DB;
-    --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+    color-scheme: dark;
+    --night: #1A0A0E;
+    --oxblood: #5E1822;
+    --garnet: #3A0D14;
+    --gold: #D4AF6A;
+    --ivory: #F4ECDF;
+    --ivory-2: rgba(244, 236, 223, 0.8);
+    --line: rgba(244, 236, 223, 0.14);
+    --display: 'Marcellus', 'Trajan Pro', Georgia, serif;
     --text: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
-    --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-      --ground: #0E1513;
-      --ink: #E4E3DA;
-      --muted: #98A5A0;
-      --line: rgba(228, 227, 218, 0.14);
-      --gilt: #CBB07A;
-      --lacquer: #1A3F39;
-      --lacquer-deep: #122E2A;
-    }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--ground); color: var(--ink); font: 350 1rem/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--night); color: var(--ivory); font: 400 1.0625rem/1.6 var(--text); -webkit-font-smoothing: antialiased; }
   .wrap { max-width: 68rem; margin: 0 auto; padding-inline: clamp(16px, 5vw, 56px); }
   h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
   p { margin: 0; max-width: 60ch; }
-  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  :focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
-  .label { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  a { color: inherit; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .num { font-variant-numeric: tabular-nums; }
+  [data-seal] svg, .seal svg { display: block; width: 100%; height: auto; }
 
   header.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
   .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
-  .brand .m { width: 2rem; color: var(--ink); }
-  .brand .m svg { display: block; width: 100%; height: auto; }
-  .brand span { font-family: var(--display); letter-spacing: 0.34em; }
-  nav { display: flex; gap: 1.5rem; font-size: 0.9rem; }
-  nav a { text-decoration: none; color: var(--muted); }
-  nav a:hover { color: var(--ink); }
+  .brand .m { width: 2.1rem; }
+  .brand span { font-family: var(--display); letter-spacing: 0.3em; }
+  nav { display: flex; gap: 1.5rem; font-size: 0.95rem; }
+  nav a { text-decoration: none; color: var(--ivory-2); }
+  nav a:hover { color: var(--gold); }
 
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-block: clamp(3rem, 8vw, 6rem); }
-  .hero h1 { font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 1; font-variation-settings: "opsz" 96; }
-  .hero h1 i { color: var(--gilt); }
   .hero .intro { display: grid; gap: 1.5rem; }
-  .hero .lede { font-size: 1.2rem; font-weight: 300; color: var(--muted); }
-  .seal { color: var(--ink); max-width: 28rem; width: 100%; justify-self: end; }
-  .seal svg { display: block; width: 100%; height: auto; }
+  .hero h1 { font-size: clamp(2.6rem, 7vw, 5.25rem); line-height: 1.02; }
+  .hero h1 span { color: var(--gold); }
+  .hero .lede { font-size: 1.2rem; color: var(--ivory-2); }
+  .seal { max-width: 28rem; width: 100%; justify-self: end; }
   @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
   .seal .vs-name { stroke-dasharray: 1; animation: draw 2.4s cubic-bezier(.55,.05,.25,1) .2s both; }
   @media (prefers-reduced-motion: reduce) { .seal .vs-name { animation: none; } }
 
   section.block { padding-block: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--line); display: grid; gap: 2rem; }
   .block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-  .block-head h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .block-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
 
-  .editions { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.5rem; }
-  .edition { background: radial-gradient(120% 100% at 80% 0%, var(--lacquer), var(--lacquer-deep)); color: var(--on-lacquer); padding: 1.5rem; display: grid; gap: 1rem; }
-  .edition .s { width: 78%; margin: 0 auto; }
-  .edition .s svg { display: block; width: 100%; height: auto; }
-  .edition .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-  .edition h3 { font-size: 1.5rem; }
-  .edition .state { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(236,232,219,.7); }
-  .edition .num { color: #D0B47C; }
+  .pieces { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.5rem; }
+  .piece { background: radial-gradient(120% 100% at 80% 0%, var(--oxblood), var(--garnet)); border: 1px solid rgba(212,175,106,.2); padding: 1.5rem; display: grid; gap: 1rem; }
+  .piece .s { width: 78%; margin: 0 auto; }
+  .piece .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .piece h3 { font-size: 1.5rem; }
+  .piece .state { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-2); }
+  .piece .num { color: var(--gold); font-weight: 500; }
 
-  .letters { display: grid; gap: 0; border-top: 1px solid var(--line); }
-  .letter { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
-  .letter h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-  .letter p { color: var(--muted); }
+  .notes { display: grid; border-top: 1px solid var(--line); }
+  .note { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
+  .note h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .note p { color: var(--ivory-2); }
 
   .find { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); border-top: 1px solid var(--line); }
   .find a { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); text-decoration: none; }
-  .find a span:last-child { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); }
-  .find a:hover span:last-child { color: var(--gilt); }
+  .find a span:last-child { color: var(--ivory-2); }
+  .find a:hover span:last-child { color: var(--gold); }
 
-  footer { border-top: 1px solid var(--line); padding-block: 2.5rem 3rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.875rem; }
-  footer b { font-family: var(--display); font-weight: 400; letter-spacing: 0.34em; color: var(--ink); }
+  footer { border-top: 1px solid var(--line); padding-block: 2.5rem 3rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: var(--ivory-2); font-size: 0.9rem; }
+  footer b { font-family: var(--display); font-weight: 400; letter-spacing: 0.3em; color: var(--ivory); }
 
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; }
     .seal { justify-self: start; max-width: 20rem; }
     nav { gap: 1rem; }
-    .letter { grid-template-columns: 1fr; gap: 0.25rem; }
+    .note { grid-template-columns: 1fr; gap: 0.25rem; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="#"><div class="m" data-seal="mark"></div><span>VESHIRO</span></a>
-    <nav aria-label="Sections"><a href="#editions">Editions</a><a href="#letters">Letters</a><a href="#find">Find</a></nav>
+    <a class="brand" href="#"><div class="m" data-seal="mark"></div><span>RESYTAL</span></a>
+    <nav aria-label="Sections"><a href="#pieces">Pieces</a><a href="#notes">Notes</a><a href="#find">Find</a></nav>
   </header>
 
   <section class="hero">
     <div class="intro">
-      <span class="label">The house of Veshiro</span>
-      <h1>Each piece, <i>signed.</i></h1>
-      <p class="lede">A small house for things made slowly. Every edition carries a seal drawn from its own name, and no two seals are alike.</p>
+      <span class="label">The house of Resytal · said "recital"</span>
+      <h1>Each piece, <span>signed.</span></h1>
+      <p class="lede">A family house for things made slowly. Every piece carries a seal drawn from its own name, and no two seals are alike.</p>
     </div>
     <div class="seal" id="seal"></div>
   </section>
 
-  <section class="block" id="editions">
-    <div class="block-head"><h2>Editions</h2><span class="label">To own</span></div>
-    <div class="editions">
-      <article class="edition">
-        <div class="s" data-seal="seal" data-item="Nightfall" data-no="1" data-ink="#ECE8DB" data-metal="#D0B47C"></div>
+  <section class="block" id="pieces">
+    <div class="block-head"><h2>Pieces</h2><span class="label">To own</span></div>
+    <div class="pieces">
+      <article class="piece">
+        <div class="s" data-seal="seal" data-item="Nightfall" data-no="1"></div>
         <div class="row"><h3>Nightfall</h3><span class="num">Nº 001</span></div>
         <span class="state">In preparation</span>
       </article>
     </div>
   </section>
 
-  <section class="block" id="letters">
-    <div class="block-head"><h2>Letters</h2><span class="label">To read</span></div>
-    <div class="letters">
-      <article class="letter">
-        <span class="label">Letter 01</span>
+  <section class="block" id="notes">
+    <div class="block-head"><h2>Notes</h2><span class="label">To read</span></div>
+    <div class="notes">
+      <article class="note">
+        <span class="label">Note 01</span>
         <div>
           <h3>Why a house, and not a shop</h3>
-          <p>A shop sells things. A house keeps them. Everything here is numbered, named and signed, so that in ten years the whole body of work can be read in order, from the first piece to the latest.</p>
+          <p>A shop sells things. A house keeps them. Everything here is numbered, named and signed, so that in ten years the whole programme can be read in order, from the first piece to the latest.</p>
         </div>
       </article>
     </div>
   </section>
 
   <section class="block" id="find">
-    <div class="block-head"><h2>Find the house</h2><span class="label">Everywhere as @veshiro</span></div>
+    <div class="block-head"><h2>Find the house</h2><span class="label">Everywhere as @resytal</span></div>
     <div class="find">
-      <a href="https://instagram.com/veshiro"><span>Instagram</span><span>@veshiro</span></a>
-      <a href="https://tiktok.com/@veshiro"><span>TikTok</span><span>@veshiro</span></a>
-      <a href="https://x.com/veshiro"><span>X</span><span>@veshiro</span></a>
-      <a href="https://youtube.com/@veshiro"><span>YouTube</span><span>@veshiro</span></a>
+      <a href="https://instagram.com/resytal"><span>Instagram</span><span>@resytal</span></a>
+      <a href="https://tiktok.com/@resytal"><span>TikTok</span><span>@resytal</span></a>
+      <a href="https://x.com/resytal"><span>X</span><span>@resytal</span></a>
+      <a href="https://youtube.com/@resytal"><span>YouTube</span><span>@resytal</span></a>
     </div>
   </section>
 
-  <footer><b>VESHIRO</b><span>Est. <span class="num">2026</span>. Each piece, signed.</span></footer>
+  <footer><b>RESYTAL</b><span>Est. <span class="num">2026</span>. Each piece, signed.</span></footer>
 </div>
 
 <script src="assets/seal.js"></script>
 <script>
 (function () {
-  var S = window.VeshiroSeal;
-  var gilt = getComputedStyle(document.documentElement).getPropertyValue('--gilt').trim();
-  document.getElementById('seal').innerHTML = S.svg({ ink: 'currentColor', metal: gilt });
+  var S = window.ResytalSeal;
+  document.getElementById('seal').innerHTML = S.svg();
   Array.prototype.forEach.call(document.querySelectorAll('[data-seal]'), function (el) {
     el.innerHTML = S.svg({
       variant: el.getAttribute('data-seal'),
       item: el.getAttribute('data-item') || '',
-      edition: el.getAttribute('data-no') ? Number(el.getAttribute('data-no')) : null,
-      ink: el.getAttribute('data-ink') || 'currentColor',
-      metal: el.getAttribute('data-metal') || gilt
+      edition: el.getAttribute('data-no') ? Number(el.getAttribute('data-no')) : null
     });
   });
 })();

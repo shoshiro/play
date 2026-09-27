@@ -1,29 +1,30 @@
 /*
- * The Veshiro Seal
+ * The Resytal Seal
  *
  * The house mark is the name itself, written as a path on a 26-letter wheel.
- * The wheel is keyed: letter n sits at step (n * 11) mod 26, so the alphabet is
+ * The wheel is keyed: letter n sits at step (n * 7) mod 26, so the alphabet is
  * shuffled into the house's own order (A stays at the top, clockwise). A curved
- * stroke visits V-E-S-H-I-R-O in order, opening with a small ring and closing
- * with a bar, the way hand-drawn sigils traditionally do.
+ * stroke visits R-E-S-Y-T-A-L in order, opening with a small ring and closing
+ * with a bar, the way hand-drawn sigils traditionally do. With this key the
+ * seven letters draw a lyre.
  *
  * Anything the house makes can carry its own seal: pass `item` and the piece's
  * name is drawn on the same wheel, over the faint house path, inside the ring.
  *
- *   VeshiroSeal.svg()                                    // house seal
- *   VeshiroSeal.svg({ variant: 'mark' })                 // no text ring
- *   VeshiroSeal.svg({ item: 'Nightfall', edition: 1 })   // edition seal
- *   VeshiroSeal.svg({ house: 'Deshar' })                 // any other house name
+ *   ResytalSeal.svg()                                    // house seal
+ *   ResytalSeal.svg({ variant: 'mark' })                 // no text ring
+ *   ResytalSeal.svg({ item: 'Nightfall', edition: 1 })   // a piece's seal
+ *   ResytalSeal.svg({ house: 'Another' })                // any other name
  *
- * Works in the browser (window.VeshiroSeal) and in Node (require).
+ * Works in the browser (window.ResytalSeal) and in Node (require).
  */
 (function (root) {
   'use strict';
 
-  var HOUSE = 'VESHIRO';
+  var HOUSE = 'RESYTAL';
   var MOTTO = 'EACH PIECE, SIGNED';
   var FOUNDED = 'MMXXVI';
-  var KEY = 11; // coprime with 26, so every letter gets its own step
+  var KEY = 7; // coprime with 26, so every letter gets its own step
 
   var R_OUTER = 96, R_OUTER_2 = 93;
   var R_TEXT = 85.5;
@@ -34,7 +35,7 @@
   function letters(str) {
     return String(str || '')
       .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
+      .replace(/[\u0300-\u036f]/g, '')
       .toUpperCase()
       .replace(/[^A-Z]/g, '')
       .split('');
@@ -109,15 +110,15 @@
 
   function svg(opts) {
     opts = opts || {};
-    var ink = opts.ink || '#16201E';
-    var metal = opts.metal || '#A88A55';
+    var ink = opts.ink || '#F4ECDF';
+    var metal = opts.metal || '#D4AF6A';
     var ground = opts.ground || 'none';
     var variant = opts.variant || 'seal'; // 'seal' | 'mark'
     var size = opts.size || null;
-    var fontFamily = opts.fontFamily || "'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif";
+    var fontFamily = opts.fontFamily || "'Marcellus', 'Trajan Pro', Georgia, serif";
     var item = opts.item ? String(opts.item) : '';
     var edition = opts.edition != null ? Number(opts.edition) : null;
-    var id = 'vs' + (++uid) + Math.random().toString(36).slice(2, 6);
+    var id = 'rs' + (++uid) + Math.random().toString(36).slice(2, 6);
 
     var houseName = opts.house ? String(opts.house).toUpperCase() : HOUSE;
     var motto = opts.motto ? String(opts.motto).toUpperCase() : MOTTO;
@@ -187,5 +188,5 @@
 
   var api = { svg: svg, points: points, path: namePath, stepOf: stepOf, KEY: KEY, letters: letters, pad: pad, HOUSE: HOUSE, MOTTO: MOTTO };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  root.VeshiroSeal = api;
+  root.ResytalSeal = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
