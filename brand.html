@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Veshiro House Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #ECEDE8;
+    --surface: #E2E5DF;
+    --ink: #16201E;
+    --muted: #55625E;
+    --line: rgba(22, 32, 30, 0.16);
+    --line-strong: rgba(22, 32, 30, 0.42);
+    --gilt: #8E703D;
+    --verdigris: #1F4A43;
+    --lacquer: #1F4A43;
+    --lacquer-deep: #173833;
+    --on-lacquer: #ECE8DB;
+    --on-lacquer-muted: rgba(236, 232, 219, 0.66);
+    --gilt-bright: #D0B47C;
+
+    --display: 'Bodoni Moda', 'Didot', 'Bodoni 72', 'Bodoni MT', Georgia, serif;
+    --text: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --step--1: 0.8125rem;
+    --step-0: 1rem;
+    --step-1: 1.25rem;
+    --step-2: 1.75rem;
+    --step-3: 2.5rem;
+    --step-4: clamp(2.75rem, 6vw, 5.75rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #0E1513;
+      --surface: #151F1C;
+      --ink: #E4E3DA;
+      --muted: #98A5A0;
+      --line: rgba(228, 227, 218, 0.14);
+      --line-strong: rgba(228, 227, 218, 0.4);
+      --gilt: #CBB07A;
+      --verdigris: #86B9AA;
+      --lacquer: #1A3F39;
+      --lacquer-deep: #122E2A;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #0E1513;
+    --surface: #151F1C;
+    --ink: #E4E3DA;
+    --muted: #98A5A0;
+    --line: rgba(228, 227, 218, 0.14);
+    --line-strong: rgba(228, 227, 218, 0.4);
+    --gilt: #CBB07A;
+    --verdigris: #86B9AA;
+    --lacquer: #1A3F39;
+    --lacquer-deep: #122E2A;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: var(--step-0);
+    font-weight: 350;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding-inline: clamp(16px, 5vw, 56px);
+  }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+  p { margin: 0; max-width: 62ch; }
+  .label {
+    font-family: var(--text);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--gilt); outline-offset: 3px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .masthead .mini { font-family: var(--display); letter-spacing: 0.34em; font-size: 0.95rem; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+    padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .hero .intro { display: grid; gap: 1.5rem; }
+  .wordmark {
+    font-family: var(--display);
+    font-size: var(--step-4);
+    font-weight: 400;
+    font-variation-settings: "opsz" 96;
+    letter-spacing: 0.14em;
+    line-height: 0.95;
+    margin-right: -0.14em;
+  }
+  .say {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    color: var(--muted);
+  }
+  .say .ipa { font-family: var(--mono); font-size: 0.9rem; }
+  .tagline {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.2;
+  }
+  .hero-seal { color: var(--ink); max-width: 30rem; width: 100%; justify-self: end; }
+  .hero-seal svg { display: block; width: 100%; height: auto; }
+
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  .drawn .vs-name { stroke-dasharray: 1; animation: draw 2.4s cubic-bezier(.55,.05,.25,1) 0.2s both; }
+  .drawn .vs-term { animation: appear 0.6s ease 2.4s both; }
+  @media (prefers-reduced-motion: reduce) {
+    .drawn .vs-name, .drawn .vs-term { animation: none; }
+  }
+
+  /* ---------- Chapters ---------- */
+  .chapter {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
+    padding-block: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+  .chapter > header { display: grid; gap: 0.4rem; align-content: start; }
+  .chapter > header .roman { font-family: var(--display); font-size: var(--step-2); color: var(--gilt); line-height: 1; }
+  .chapter-body { display: grid; gap: 2rem; min-width: 0; }
+  .chapter h2 { font-size: var(--step-3); line-height: 1.1; }
+  .lede { font-size: var(--step-1); line-height: 1.5; font-weight: 300; }
+
+  /* Name */
+  .roots { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .root { background: var(--ground); padding: 1.5rem; display: grid; gap: 0.5rem; align-content: start; }
+  .root .word { font-family: var(--display); font-size: var(--step-2); line-height: 1.1; }
+  .root .word em { font-style: italic; }
+  .root .gloss { color: var(--muted); }
+
+  /* Seal construction */
+  .construct { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+  .wheel { color: var(--ink); max-width: 26rem; width: 100%; }
+  .wheel svg { display: block; width: 100%; height: auto; }
+  .steps { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; }
+  .steps li::before { counter-increment: s; content: counter(s); font-family: var(--display); font-size: var(--step-1); color: var(--gilt); line-height: 1.3; }
+  .steps b { font-weight: 550; }
+  .keyrow { display: flex; flex-wrap: wrap; gap: 0.35rem; font-family: var(--mono); font-size: 0.8rem; }
+  .keyrow span { border: 1px solid var(--line); padding: 0.15rem 0.45rem; }
+  .keyrow span.on { border-color: var(--gilt); color: var(--gilt); }
+
+  /* Signing lacquer panel */
+  .lacquer {
+    background: radial-gradient(120% 90% at 80% 10%, var(--lacquer) 0%, var(--lacquer-deep) 70%);
+    color: var(--on-lacquer);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+  .lacquer .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .lacquer .label { color: var(--on-lacquer-muted); }
+  .lacquer h2 { font-size: var(--step-3); line-height: 1.1; }
+  .lacquer p { color: var(--on-lacquer-muted); }
+  .sign-form { display: grid; gap: 1.1rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field label { font-size: var(--step--1); letter-spacing: 0.16em; text-transform: uppercase; color: var(--on-lacquer-muted); }
+  .field input {
+    font: inherit;
+    font-family: var(--display);
+    font-size: var(--step-1);
+    color: var(--on-lacquer);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(236, 232, 219, 0.35);
+    padding: 0.35rem 0;
+    border-radius: 0;
+    width: 100%;
+  }
+  .field input:focus { outline: none; border-bottom-color: var(--gilt-bright); }
+  .row { display: grid; grid-template-columns: minmax(0, 1fr) 7rem; gap: 1.25rem; }
+  .presets { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chip, .btn {
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--on-lacquer);
+    background: transparent;
+    border: 1px solid rgba(236, 232, 219, 0.3);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border-radius: 999px;
+  }
+  .chip:hover, .btn:hover { border-color: var(--gilt-bright); color: var(--gilt-bright); }
+  .btn { border-radius: 0; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.75rem; padding: 0.7rem 1.1rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .status { font-size: 0.85rem; color: var(--gilt-bright); min-height: 1.4em; }
+  .signed { color: var(--on-lacquer); max-width: 30rem; width: 100%; justify-self: center; }
+  .signed svg { display: block; width: 100%; height: auto; }
+  .signed-caption { margin-top: 0.75rem; text-align: center; font-family: var(--display); font-style: italic; color: var(--on-lacquer-muted); }
+
+  /* House system */
+  .ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+  .ledger article { display: grid; gap: 0.75rem; align-content: start; padding-top: 1.25rem; border-top: 1px solid var(--line-strong); }
+  .ledger h3 { font-size: var(--step-2); }
+  .ledger .form { font-family: var(--mono); font-size: 0.85rem; color: var(--gilt); }
+  .ledger ul { margin: 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: 0.3rem; }
+
+  /* Palette */
+  .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; }
+  .swatch { display: grid; grid-template-rows: 9rem auto; }
+  .swatch .chipc { border: 1px solid var(--line); }
+  .swatch .meta { padding-top: 0.75rem; display: grid; gap: 0.15rem; }
+  .swatch .jp { font-family: var(--display); font-size: var(--step-1); line-height: 1.2; }
+  .swatch .jp small { font-size: 0.8em; color: var(--muted); margin-left: 0.25rem; }
+  .swatch .hex { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+  .swatch .role { font-size: 0.875rem; color: var(--muted); }
+  .ratio { display: flex; height: 0.75rem; border: 1px solid var(--line); }
+  .ratio span { display: block; height: 100%; }
+  .ratio-legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-size: 0.8rem; color: var(--muted); }
+  .ratio-legend .num { font-size: 0.8rem; }
+
+  /* Type */
+  .type-grid { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .specimen { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1rem 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .specimen .who { display: grid; gap: 0.2rem; }
+  .specimen .who b { font-weight: 550; }
+  .specimen .who span { color: var(--muted); font-size: 0.875rem; }
+  .spec-display { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.05; font-variation-settings: "opsz" 72; overflow-wrap: anywhere; }
+  .spec-display i { font-weight: 400; }
+  .spec-text { font-size: var(--step-1); font-weight: 300; line-height: 1.5; }
+  .spec-mono { font-family: var(--mono); font-size: var(--step-1); letter-spacing: 0.02em; }
+
+  /* Voice */
+  .voice { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem 2.5rem; }
+  .voice-rules { display: grid; gap: 0.9rem; margin: 0; padding: 0; list-style: none; }
+  .voice-rules li { padding-left: 1.25rem; position: relative; }
+  .voice-rules li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.5rem; height: 1px; background: var(--gilt); }
+  .pairs { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
+  .pair .yes { font-family: var(--display); font-size: 1.1rem; }
+  .pair .no { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  .pair-head { font-size: var(--step--1); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* In the world */
+  .world { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; }
+  .piece { display: grid; gap: 0.6rem; align-content: start; }
+  .piece figcaption { font-size: 0.85rem; color: var(--muted); }
+  .piece figcaption b { color: var(--ink); font-weight: 550; }
+  figure { margin: 0; }
+  .w-banner { grid-column: span 4; }
+  .w-avatar { grid-column: span 2; }
+  .w-card { grid-column: span 3; }
+  .w-tag { grid-column: span 1; }
+  .w-post { grid-column: span 2; }
+
+  .banner {
+    aspect-ratio: 3 / 1;
+    max-width: 100%;
+    background: radial-gradient(120% 140% at 85% 20%, #25564E 0%, #16332E 75%);
+    color: #ECE8DB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 7%;
+    overflow: hidden;
+    position: relative;
+  }
+  .banner .bw { font-family: var(--display); font-size: clamp(1.1rem, 4vw, 2.6rem); letter-spacing: 0.3em; }
+  .banner .bt { font-family: var(--display); font-style: italic; font-size: clamp(0.65rem, 1.4vw, 0.95rem); color: rgba(236,232,219,.7); margin-top: 0.3rem; }
+  .banner .bs { width: 34%; max-width: 100%; color: #ECE8DB; opacity: 0.95; }
+  .banner svg { display: block; width: 100%; height: auto; }
+
+  .avatars { display: flex; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
+  .avatar { border-radius: 50%; background: radial-gradient(100% 100% at 30% 20%, #25564E, #16332E); color: #ECE8DB; display: grid; place-items: center; overflow: hidden; }
+  .avatar svg { width: 82%; height: auto; display: block; }
+
+  .card-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .card {
+    aspect-ratio: 85 / 55;
+    max-width: 100%;
+    box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 8px 24px -12px rgba(0,0,0,.3);
+    display: grid;
+    padding: 9%;
+    overflow: hidden;
+  }
+  .card.front { background: #16332E; color: #ECE8DB; place-items: center; }
+  .card.front svg { width: 46%; height: auto; display: block; }
+  .card.back { background: #F1F0EA; color: #16201E; align-content: space-between; }
+  .card.back .cn { font-family: var(--display); letter-spacing: 0.3em; font-size: clamp(0.7rem, 1.4vw, 0.95rem); }
+  .card.back .cd { font-size: clamp(0.5rem, 0.9vw, 0.68rem); line-height: 1.5; color: #55625E; }
+
+  .tag {
+    aspect-ratio: 2 / 3.6;
+    max-width: 100%;
+    background: #F1F0EA;
+    color: #16201E;
+    box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 8px 24px -12px rgba(0,0,0,.3);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-items: center;
+    padding: 12% 10%;
+    text-align: center;
+    position: relative;
+  }
+  .tag::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid #A7ABA3; background: var(--ground); }
+  .tag .ts { width: 100%; align-self: center; }
+  .tag .ts svg { display: block; width: 100%; height: auto; }
+  .tag .tn { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.05em; color: #55625E; }
+
+  .post {
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    background: #F1F0EA;
+    color: #16201E;
+    padding: 10%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 8px 24px -12px rgba(0,0,0,.3);
+  }
+  .post .pl { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #55625E; }
+  .post .pq { font-family: var(--display); font-size: clamp(1rem, 2vw, 1.35rem); line-height: 1.25; align-self: center; }
+  .post .pf { display: flex; justify-content: space-between; align-items: center; }
+  .post .pf span { font-family: var(--display); letter-spacing: 0.3em; font-size: 0.65rem; }
+  .post .pf svg { width: 2.2rem; height: auto; display: block; }
+
+  /* Claim */
+  .claims { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .claim { display: flex; gap: 0.75rem; align-items: baseline; padding: 0.8rem 0.25rem; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .claim input { accent-color: var(--verdigris); width: 1rem; height: 1rem; transform: translateY(2px); }
+  .claim .h { font-family: var(--mono); font-size: 0.9rem; }
+  .claim .p { color: var(--muted); font-size: 0.875rem; margin-left: auto; }
+  .claim input:checked ~ .h { text-decoration: line-through; text-decoration-color: var(--gilt); color: var(--muted); }
+  .note { font-size: 0.875rem; color: var(--muted); }
+
+  footer.colophon { border-top: 1px solid var(--line); padding-block: 2.5rem 3rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: 0.875rem; }
+  footer.colophon .mini { font-family: var(--display); letter-spacing: 0.34em; color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero, .construct, .lacquer .grid { grid-template-columns: 1fr; }
+    .hero-seal { justify-self: start; max-width: 22rem; }
+    .chapter { grid-template-columns: 1fr; }
+    .chapter > header { grid-auto-flow: column; justify-content: start; align-items: baseline; gap: 0.9rem; }
+    .swatches { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+    .world { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .w-banner, .w-card { grid-column: 1 / -1; }
+    .w-avatar { grid-column: 1 / -1; }
+    .w-tag { grid-column: span 1; }
+    .w-post { grid-column: span 1; }
+    .post { aspect-ratio: auto; gap: 1rem; }
+    .specimen { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .row { grid-template-columns: 1fr 5rem; }
+    .pair, .pair-head { grid-template-columns: 1fr; gap: 0.25rem; }
+    .pair-head span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="mini">VESHIRO</span>
+    <span class="label">House book · Edition I · <span class="num">2026</span></span>
+  </div>
+
+  <section class="hero" aria-labelledby="wm">
+    <div class="intro">
+      <span class="label">The house of</span>
+      <h1 class="wordmark" id="wm">VESHIRO</h1>
+      <div class="say">
+        <span class="ipa">/vɛˈʃiː.roʊ/</span>
+        <span>veh · <b>shee</b> · roh</span>
+      </div>
+      <p class="tagline">Each piece, signed.</p>
+      <p>One name for everything you make, sell and share. Every piece that leaves the house carries a seal drawn from its own name, so the signature grows with the work and never repeats.</p>
+    </div>
+    <div class="hero-seal drawn" id="hero-seal"></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="chapter" id="name" aria-labelledby="h-name">
+    <header><span class="roman">I</span><span class="label">The name</span></header>
+    <div class="chapter-body">
+      <h2 id="h-name">A trace left on a white page.</h2>
+      <p class="lede">Veshiro joins a Latin root and a Japanese one. It sounds like nothing else, spells the same in every language, and fits every platform handle at seven letters.</p>
+      <div class="roots">
+        <div class="root">
+          <span class="label">Latin</span>
+          <span class="word"><em>ve</em>stigium</span>
+          <span class="gloss">A footprint, a trace. The mark that proves someone was here.</span>
+        </div>
+        <div class="root">
+          <span class="label">Japanese</span>
+          <span class="word"><em>shiro</em> 白 · 城</span>
+          <span class="gloss">White, the blank page. Also a castle: a house that holds things of value.</span>
+        </div>
+        <div class="root">
+          <span class="label">Together</span>
+          <span class="word">ve · shiro</span>
+          <span class="gloss">Your mark on the blank page, kept inside a house. And a quiet nod to where it began, shoshiro.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="seal" aria-labelledby="h-seal">
+    <header><span class="roman">II</span><span class="label">The seal</span></header>
+    <div class="chapter-body">
+      <h2 id="h-seal">The name, written as a single line.</h2>
+      <div class="construct">
+        <div class="wheel" id="wheel"></div>
+        <ol class="steps">
+          <li><div><b>The keyed wheel.</b> The 26 letters sit around a circle, but not in order. Each letter moves eleven steps from the last, which shuffles the alphabet into the house's own sequence.</div></li>
+          <li><div><b>The path.</b> One stroke visits V, E, S, H, I, R and O in turn, bowing toward the centre between letters. The shape it makes, a gate under a crown, belongs to this name alone.</div></li>
+          <li><div><b>The terminals.</b> The line opens with a small ring and closes with a bar, the way hand-cut sigils always have. Letters in play are marked in gilt on the tick ring.</div></li>
+          <li>
+            <div style="display:grid;gap:.5rem"><b>The house order.</b>
+              <div class="keyrow" id="keyrow" aria-label="Alphabet in keyed wheel order"></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="lacquer" id="sign" aria-labelledby="h-sign">
+  <div class="wrap">
+    <div class="grid">
+      <div class="sign-form">
+        <span class="label">III · Sign a piece</span>
+        <h2 id="h-sign">Everything you release gets its own seal.</h2>
+        <p>Type the name of a product, print, song or letter. Its name is drawn in gilt on the same wheel, over the faint house line, with its edition number in the ring.</p>
+        <form id="sign-form" class="sign-form" autocomplete="off">
+          <div class="row">
+            <div class="field">
+              <label for="piece-name">Piece</label>
+              <input id="piece-name" name="piece" value="Nightfall" maxlength="28">
+            </div>
+            <div class="field">
+              <label for="piece-no">Nº</label>
+              <input id="piece-no" name="no" type="number" min="0" max="999" value="1" inputmode="numeric">
+            </div>
+          </div>
+          <div class="presets" aria-label="Examples">
+            <button type="button" class="chip" data-p="Nightfall" data-n="1">Nightfall · print</button>
+            <button type="button" class="chip" data-p="First Light" data-n="2">First Light · song</button>
+            <button type="button" class="chip" data-p="Atelier Tee" data-n="3">Atelier Tee · garment</button>
+            <button type="button" class="chip" data-p="On Patience" data-n="7">On Patience · letter</button>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn" id="copy-svg">Copy SVG</button>
+            <span class="status" id="status" role="status"></span>
+          </div>
+        </form>
+      </div>
+      <div>
+        <div class="signed" id="signed"></div>
+        <p class="signed-caption" id="signed-caption"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="chapter" id="house" aria-labelledby="h-house">
+    <header><span class="roman">IV</span><span class="label">The house</span></header>
+    <div class="chapter-body">
+      <h2 id="h-house">Two kinds of work, one ledger.</h2>
+      <p class="lede">You don't need to know yet what you'll make. The house has one place for things you sell and one for things you share, and both keep count from the first piece.</p>
+      <div class="ledger">
+        <article>
+          <span class="label">To sell</span>
+          <h3>Editions</h3>
+          <span class="form">Nº 001, Nº 002, Nº 003 …</span>
+          <p>Anything with a price: a print, a garment, a template, a session. Each is numbered, sealed, and made in a stated quantity.</p>
+          <ul>
+            <li>Three-digit number, never reused</li>
+            <li>Its own seal from its own name</li>
+            <li>A quantity, even if it is "open"</li>
+          </ul>
+        </article>
+        <article>
+          <span class="label">To share</span>
+          <h3>Letters</h3>
+          <span class="form">Letter 01, Letter 02 …</span>
+          <p>Anything free: a post, a video, a thought, a process shot. Letters build the audience that Editions later serve.</p>
+          <ul>
+            <li>Two-digit number, counted separately</li>
+            <li>Signed with the house mark in a corner</li>
+            <li>A title that could stand alone</li>
+          </ul>
+        </article>
+        <article>
+          <span class="label">Everywhere</span>
+          <h3>The same hand</h3>
+          <span class="form">@veshiro</span>
+          <p>One handle, one avatar, one seal. When people meet the work on any platform, they meet the same house.</p>
+          <ul>
+            <li>Avatar is always the mark on verdigris</li>
+            <li>Bio line: Each piece, signed.</li>
+            <li>Link goes to the house site</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="colour" aria-labelledby="h-colour">
+    <header><span class="roman">V</span><span class="label">Colour</span></header>
+    <div class="chapter-body">
+      <h2 id="h-colour">Patina, porcelain and a little gold.</h2>
+      <p class="lede">The signature colour is <i>rokushō</i>, the green patina that forms on old bronze. It says "kept for a long time". Gilt is used the way jewellers use it: sparingly, on the one thing that matters.</p>
+      <div class="swatches">
+        <div class="swatch"><div class="chipc" style="background:#1F4A43"></div><div class="meta"><span class="jp">Rokushō<small>緑青</small></span><span class="hex">#1F4A43</span><span class="role">Signature. Avatars, packaging, cards.</span></div></div>
+        <div class="swatch"><div class="chipc" style="background:#ECEDE8"></div><div class="meta"><span class="jp">Shiro<small>白</small></span><span class="hex">#ECEDE8</span><span class="role">Ground. The white page.</span></div></div>
+        <div class="swatch"><div class="chipc" style="background:#16201E"></div><div class="meta"><span class="jp">Sumi<small>墨</small></span><span class="hex">#16201E</span><span class="role">Ink. Text and the seal line.</span></div></div>
+        <div class="swatch"><div class="chipc" style="background:#B8995F"></div><div class="meta"><span class="jp">Kin<small>金</small></span><span class="hex">#B8995F</span><span class="role">Gilt. Edition seals and numbers only.</span></div></div>
+        <div class="swatch"><div class="chipc" style="background:#6A7773"></div><div class="meta"><span class="jp">Nezumi<small>鼠</small></span><span class="hex">#6A7773</span><span class="role">Quiet grey. Captions, details.</span></div></div>
+      </div>
+      <div style="display:grid;gap:.6rem">
+        <span class="label">Proportion in use</span>
+        <div class="ratio" role="img" aria-label="Shiro 60 percent, Rokushō 22 percent, Sumi 12 percent, Nezumi 4 percent, Kin 2 percent">
+          <span style="width:60%;background:#ECEDE8"></span>
+          <span style="width:22%;background:#1F4A43"></span>
+          <span style="width:12%;background:#16201E"></span>
+          <span style="width:4%;background:#6A7773"></span>
+          <span style="width:2%;background:#B8995F"></span>
+        </div>
+        <div class="ratio-legend">
+          <span>Shiro <span class="num">60%</span></span><span>Rokushō <span class="num">22%</span></span><span>Sumi <span class="num">12%</span></span><span>Nezumi <span class="num">4%</span></span><span>Kin <span class="num">2%</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="type" aria-labelledby="h-type">
+    <header><span class="roman">VI</span><span class="label">Type</span></header>
+    <div class="chapter-body">
+      <h2 id="h-type">A Bodoni for the voice, a grotesk for the facts.</h2>
+      <div class="type-grid">
+        <div class="specimen">
+          <div class="who"><b>Bodoni Moda</b><span>Display, wordmark, titles</span></div>
+          <div class="spec-display">Nightfall, <i>signed</i> in gilt</div>
+        </div>
+        <div class="specimen">
+          <div class="who"><b>Hanken Grotesk</b><span>Body, captions, product details</span></div>
+          <div class="spec-text">Archival pigment on cotton rag, 50 × 70 cm. Forty made, each numbered by hand. Ships in a verdigris folio.</div>
+        </div>
+        <div class="specimen">
+          <div class="who"><b>IBM Plex Mono</b><span>Numbers and codes only</span></div>
+          <div class="spec-mono">Nº 004 · 12 / 40 · 2026.10.03</div>
+        </div>
+      </div>
+      <p class="note">The wordmark is Bodoni Moda at its largest optical size, all capitals, tracked +140. All three faces are free on Google Fonts, so they work on any website, shop or design tool.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="voice" aria-labelledby="h-voice">
+    <header><span class="roman">VII</span><span class="label">Voice</span></header>
+    <div class="chapter-body">
+      <h2 id="h-voice">Say less. Name the material, the number, the date.</h2>
+      <div class="voice">
+        <ul class="voice-rules">
+          <li>No exclamation marks, no emoji, no countdowns. Scarcity is stated, never shouted.</li>
+          <li>Numbers are exact: <span class="num">Nº 004</span>, forty made, ships 3 October.</li>
+          <li>Things are "pieces" and "editions", never "content", "drops" or "merch".</li>
+          <li>Prices are shown plainly. The house does not run sales.</li>
+          <li>Write like a letter to one person, not an announcement to a crowd.</li>
+        </ul>
+        <div>
+          <div class="pair-head"><span>Say</span><span>Instead of</span></div>
+          <div class="pairs">
+            <div class="pair"><span class="yes">Edition Nº 004. Forty made.</span><span class="no">NEW DROP, limited stock!</span></div>
+            <div class="pair"><span class="yes">Available from Friday, 10:00.</span><span class="no">Don't miss out, set your alarms</span></div>
+            <div class="pair"><span class="yes">Letter 07: on patience.</span><span class="no">New content up, link in bio</span></div>
+            <div class="pair"><span class="yes">Twelve remain.</span><span class="no">Almost sold out!!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="world" aria-labelledby="h-world">
+    <header><span class="roman">VIII</span><span class="label">In the world</span></header>
+    <div class="chapter-body">
+      <h2 id="h-world">The same hand, on every surface.</h2>
+      <div class="world">
+        <figure class="piece w-banner">
+          <div class="banner">
+            <div><div class="bw">VESHIRO</div><div class="bt">Each piece, signed.</div></div>
+            <div class="bs" data-seal="seal" data-ink="#ECE8DB"></div>
+          </div>
+          <figcaption><b>Profile banner.</b> X, YouTube, LinkedIn. 1500 × 500.</figcaption>
+        </figure>
+        <figure class="piece w-avatar">
+          <div class="avatars">
+            <div class="avatar" style="width:9rem;height:9rem" data-seal="mark" data-ink="#ECE8DB"></div>
+            <div class="avatar" style="width:4rem;height:4rem" data-seal="mark" data-ink="#ECE8DB"></div>
+            <div class="avatar" style="width:2rem;height:2rem" data-seal="mark" data-ink="#ECE8DB"></div>
+          </div>
+          <figcaption><b>Avatar.</b> The mark reads at every size down to a favicon.</figcaption>
+        </figure>
+        <figure class="piece w-card">
+          <div class="card-pair">
+            <div class="card front" data-seal="mark" data-ink="#D0B47C"></div>
+            <div class="card back">
+              <div class="cn">VESHIRO</div>
+              <div class="cd">Each piece, signed.<br>veshiro.com · @veshiro</div>
+            </div>
+          </div>
+          <figcaption><b>Card.</b> Gilt foil on verdigris stock; the reverse on white.</figcaption>
+        </figure>
+        <figure class="piece w-tag">
+          <div class="tag">
+            <div class="ts" data-seal="seal" data-item="Nightfall" data-no="1" data-ink="#16201E" data-metal="#9C7E47"></div>
+            <div class="tn">Nº 001 · 12/40</div>
+          </div>
+          <figcaption><b>Swing tag.</b> Every edition.</figcaption>
+        </figure>
+        <figure class="piece w-post">
+          <div class="post">
+            <div class="pl">Letter 01</div>
+            <div class="pq">Why a house, and not a shop: a shop sells things. A house keeps them.</div>
+            <div class="pf"><span>VESHIRO</span><div data-seal="mark" data-ink="#16201E"></div></div>
+          </div>
+          <figcaption><b>Shared post.</b> Signed in the corner.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="claim" aria-labelledby="h-claim">
+    <header><span class="roman">IX</span><span class="label">Claim it</span></header>
+    <div class="chapter-body">
+      <h2 id="h-claim">Take the name everywhere before you need it.</h2>
+      <p class="note">A web search found no brand using the name Veshiro. Platform handles and domains couldn't be checked from here, so register them in one sitting. Tick them off as you go; ticks are saved in this browser only.</p>
+      <div class="claims" id="claims">
+        <label class="claim"><input type="checkbox" id="c-domain"><span class="h">veshiro.com</span><span class="p">Domain</span></label>
+        <label class="claim"><input type="checkbox" id="c-ig"><span class="h">@veshiro</span><span class="p">Instagram</span></label>
+        <label class="claim"><input type="checkbox" id="c-tt"><span class="h">@veshiro</span><span class="p">TikTok</span></label>
+        <label class="claim"><input type="checkbox" id="c-x"><span class="h">@veshiro</span><span class="p">X</span></label>
+        <label class="claim"><input type="checkbox" id="c-yt"><span class="h">@veshiro</span><span class="p">YouTube</span></label>
+        <label class="claim"><input type="checkbox" id="c-th"><span class="h">@veshiro</span><span class="p">Threads</span></label>
+        <label class="claim"><input type="checkbox" id="c-pin"><span class="h">veshiro</span><span class="p">Pinterest</span></label>
+        <label class="claim"><input type="checkbox" id="c-gh"><span class="h">veshiro</span><span class="p">GitHub</span></label>
+        <label class="claim"><input type="checkbox" id="c-mail"><span class="h">house@veshiro.com</span><span class="p">Email</span></label>
+        <label class="claim"><input type="checkbox" id="c-shop"><span class="h">veshiro</span><span class="p">Shopify or Etsy</span></label>
+        <label class="claim"><input type="checkbox" id="c-li"><span class="h">veshiro</span><span class="p">LinkedIn page</span></label>
+        <label class="claim"><input type="checkbox" id="c-sub"><span class="h">veshiro</span><span class="p">Substack letters</span></label>
+      </div>
+      <p class="note">If the .com is taken, prefer <span class="num">veshiro.house</span> or <span class="num">houseofveshiro.com</span>, and keep the handle identical on every platform.</p>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <span class="mini">VESHIRO</span>
+    <span>House book, Edition I. Set in Bodoni Moda, Hanken Grotesk and IBM Plex Mono.</span>
+  </footer>
+</div>
+
+<script src="assets/seal.js"></script>
+<script>
+(function () {
+  var S = window.VeshiroSeal;
+  var root = document.documentElement;
+
+  function token(name) {
+    return getComputedStyle(root).getPropertyValue(name).trim();
+  }
+
+  function renderTheme() {
+    document.getElementById('hero-seal').innerHTML = S.svg({ ink: 'currentColor', metal: token('--gilt') });
+    drawWheel();
+  }
+
+  // Wheel diagram: every letter placed at its keyed step, the house path on top.
+  function drawWheel() {
+    var ink = 'currentColor', gilt = token('--gilt');
+    var house = {};
+    S.letters(S.HOUSE).forEach(function (c) { house[c] = true; });
+    var out = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" role="img" aria-label="Keyed letter wheel with the path of V, E, S, H, I, R, O">';
+    out += '<circle r="60" fill="none" stroke="' + ink + '" stroke-width="0.4" opacity="0.5"/>';
+    for (var i = 0; i < 26; i++) {
+      var ch = String.fromCharCode(65 + i);
+      var a = (S.stepOf(ch) / 26) * Math.PI * 2 - Math.PI / 2;
+      var lx = 80 * Math.cos(a), ly = 80 * Math.sin(a);
+      var px = 60 * Math.cos(a), py = 60 * Math.sin(a);
+      var on = house[ch];
+      out += '<circle cx="' + px.toFixed(2) + '" cy="' + py.toFixed(2) + '" r="' + (on ? 1.8 : 0.9) + '" fill="' + (on ? gilt : ink) + '"/>';
+      out += '<text x="' + lx.toFixed(2) + '" y="' + ly.toFixed(2) + '" text-anchor="middle" dominant-baseline="central" font-family="Bodoni Moda, Georgia, serif" font-size="' + (on ? 10 : 7.5) + '" fill="' + (on ? gilt : ink) + '" opacity="' + (on ? 1 : 0.55) + '">' + ch + '</text>';
+    }
+    var d = S.path(S.points(S.HOUSE), 0.28);
+    out += '<path d="' + d + '" fill="none" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>';
+    out += '</svg>';
+    document.getElementById('wheel').innerHTML = out;
+  }
+
+  function drawKeyRow() {
+    var order = [];
+    for (var i = 0; i < 26; i++) order.push(String.fromCharCode(65 + i));
+    order.sort(function (a, b) { return S.stepOf(a) - S.stepOf(b); });
+    var house = {};
+    S.letters(S.HOUSE).forEach(function (c) { house[c] = true; });
+    document.getElementById('keyrow').innerHTML = order.map(function (c) {
+      return '<span' + (house[c] ? ' class="on"' : '') + '>' + c + '</span>';
+    }).join('');
+  }
+
+  // Signing panel.
+  var nameEl = document.getElementById('piece-name');
+  var noEl = document.getElementById('piece-no');
+  var status = document.getElementById('status');
+  var current = '';
+
+  function sign() {
+    var item = nameEl.value.trim() || 'Untitled';
+    var no = Math.max(0, Math.min(999, parseInt(noEl.value, 10) || 0));
+    current = S.svg({ item: item, edition: no, ink: '#ECE8DB', metal: '#D0B47C' });
+    document.getElementById('signed').innerHTML = current;
+    document.getElementById('signed-caption').textContent = 'Nº ' + S.pad(no) + ', ' + item;
+    status.textContent = '';
+  }
+  nameEl.addEventListener('input', sign);
+  noEl.addEventListener('input', sign);
+  document.getElementById('sign-form').addEventListener('submit', function (e) { e.preventDefault(); sign(); });
+  Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (b) {
+    b.addEventListener('click', function () {
+      nameEl.value = b.getAttribute('data-p');
+      noEl.value = b.getAttribute('data-n');
+      sign();
+    });
+  });
+  document.getElementById('copy-svg').addEventListener('click', function () {
+    var done = function () { status.textContent = 'SVG copied. Paste it into Figma, Illustrator or a text file.'; };
+    var fail = function () { status.textContent = 'Copy was blocked here. Use the export folder in the repo instead.'; };
+    try {
+      navigator.clipboard.writeText(current).then(done, fail);
+    } catch (e) { fail(); }
+  });
+
+  // Mockups.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-seal]'), function (el) {
+    el.innerHTML = S.svg({
+      variant: el.getAttribute('data-seal'),
+      item: el.getAttribute('data-item') || '',
+      edition: el.getAttribute('data-no') ? Number(el.getAttribute('data-no')) : null,
+      ink: el.getAttribute('data-ink') || 'currentColor',
+      metal: el.getAttribute('data-metal') || '#D0B47C'
+    });
+  });
+
+  // Claim checklist, remembered per browser.
+  Array.prototype.forEach.call(document.querySelectorAll('#claims input'), function (box) {
+    try { box.checked = localStorage.getItem('veshiro-' + box.id) === '1'; } catch (e) {}
+    box.addEventListener('change', function () {
+      try { localStorage.setItem('veshiro-' + box.id, box.checked ? '1' : '0'); } catch (e) {}
+    });
+  });
+
+  drawKeyRow();
+  renderTheme();
+  sign();
+
+  // Re-colour the theme-dependent drawings when the theme changes.
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', renderTheme);
+  new MutationObserver(renderTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+</body>
+</html>
