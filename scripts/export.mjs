@@ -99,7 +99,7 @@ const pages = [
   {
     file: 'og-1200x630.png', w: 1200, h: 630,
     html: `<div style="width:1200px;height:630px;background:${C.night};display:flex;align-items:center;justify-content:space-between;padding:0 90px">
-      <div><div style="font-family:'Hanken Grotesk',Arial,sans-serif;font-weight:600;font-size:18px;letter-spacing:.18em;color:${C.gold};margin-bottom:30px">THE HOUSE OF</div>
+      <div><div style="font-family:'Hanken Grotesk',Arial,sans-serif;font-weight:600;font-size:18px;letter-spacing:.18em;color:${C.gold};margin-bottom:30px">SAID &ldquo;RECITAL&rdquo;</div>
       ${wordmark(84, C.ivory, 0.2)}${line(34, C.gold, 28)}</div>
       <div style="width:440px">${onDark('seal')}</div></div>`,
   },

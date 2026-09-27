@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Resytal House Book</title>
+<title>Resytal Brand Kit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@400;500;600&display=swap">
@@ -72,6 +72,18 @@
   .drawn .vs-term { animation: appear 0.6s ease 2.4s both; }
   @media (prefers-reduced-motion: reduce) { .drawn .vs-name, .drawn .vs-term { animation: none; } }
 
+  /* How to use */
+  .use { display: grid; gap: 1.5rem; padding-block: clamp(2.5rem, 6vw, 3.5rem); border-top: 1px solid var(--line); }
+  .use h2 { font-size: var(--step-3); line-height: 1.12; }
+  .use-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; counter-reset: u; }
+  .use-steps li { border: 1px solid var(--line-gold); padding: 1.25rem; display: grid; gap: 0.5rem; align-content: start; }
+  .use-steps li::before { counter-increment: u; content: counter(u); font-family: var(--display); font-size: var(--step-2); color: var(--gold); line-height: 1; }
+  .use-steps b { font-weight: 600; }
+  .use-steps span { color: var(--ivory-2); font-size: 0.97rem; }
+  .use-steps a { color: var(--gold); }
+  @media (max-width: 860px) { .use-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .use-steps { grid-template-columns: 1fr; } }
+
   /* Chapters */
   .chapter { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem); padding-block: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--line); }
   .chapter > header { display: grid; gap: 0.4rem; align-content: start; }
@@ -123,7 +135,7 @@
   .signed { max-width: 30rem; width: 100%; justify-self: center; }
   .signed-caption { margin: 0.75rem auto 0; text-align: center; font-family: var(--display); font-size: 1.1rem; color: var(--ivory-2); }
 
-  /* House system */
+  /* Programme */
   .ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
   .ledger article { display: grid; gap: 0.75rem; align-content: start; padding-top: 1.25rem; border-top: 1px solid var(--line-gold); }
   .ledger h3 { font-size: var(--step-2); }
@@ -240,21 +252,33 @@
 <div class="wrap">
   <div class="masthead">
     <span class="mini">RESYTAL</span>
-    <span class="label">House book · Edition II · <span class="num">2026</span></span>
+    <span class="label">Brand kit · <span class="num">2026</span></span>
   </div>
 
   <section class="hero" aria-labelledby="wm">
     <div class="intro">
-      <span class="label">The house of</span>
+      <span class="label">Your brand</span>
       <h1 class="wordmark" id="wm">RESYTAL</h1>
       <div class="say">
         <span>said "recital"</span>
         <span class="he" lang="he" dir="rtl">רסיטל</span>
       </div>
       <p class="tagline">Each piece, signed.</p>
-      <p>One name for everything you make, sell and share. Every piece that leaves the house carries a seal drawn from its own name, so the signature grows with the work and never repeats.</p>
+      <p>One name for everything you make, sell and share. Everything you release carries a seal drawn from its own name, so the signature grows with the work and never repeats.</p>
     </div>
     <div class="hero-seal drawn" id="hero-seal"></div>
+  </section>
+
+  <section class="use" aria-labelledby="h-use">
+    <span class="label">What this page is</span>
+    <h2 id="h-use">Your brand's rulebook and toolkit, in one place.</h2>
+    <p class="lede">Everything below is what makes Resytal look and sound the same everywhere: the name, the logo, the colours, the fonts and the way you write. Come back to it whenever you post, sell or design something.</p>
+    <ol class="use-steps">
+      <li><b>Set up your profiles</b><span>Upload the profile picture and banner from the repo's <code>export</code> folder to Instagram, TikTok, X and YouTube.</span></li>
+      <li><b>Claim the name</b><span>Register @resytal and resytal.com everywhere, using the checklist in <a href="#claim">section IX</a>.</span></li>
+      <li><b>Seal what you release</b><span>Type a product or post name into <a href="#sign">section III</a> to get its own logo, then copy it.</span></li>
+      <li><b>Stay consistent</b><span>Use the <a href="#colour">colours</a>, <a href="#type">fonts</a> and <a href="#voice">voice</a> sections whenever you make something new.</span></li>
+    </ol>
   </section>
 </div>
 
@@ -263,17 +287,17 @@
     <header><span class="roman">I</span><span class="label">The name</span></header>
     <div class="chapter-body">
       <h2 id="h-name">A family name, performed.</h2>
-      <p class="lede">Resytal is the family name in its Hebrew form, recital. The house carries it the way the great houses carry their founders' names, spelled so that it belongs to no one else.</p>
+      <p class="lede">Resytal is the family name in its Hebrew form, recital. The brand carries it the way Chanel or Dior carry their founders' names, spelled so that it belongs to no one else.</p>
       <div class="roots">
         <div class="root">
           <span class="label">The family</span>
           <span class="word">רסיטל</span>
-          <span class="gloss">The family name, in Hebrew. Everyone who shares it is in the house.</span>
+          <span class="gloss">The family name, in Hebrew. The whole family is in the brand.</span>
         </div>
         <div class="root">
           <span class="label">The word</span>
           <span class="word">recital</span>
-          <span class="gloss">A performance of pieces, presented one at a time. The house releases its work the same way.</span>
+          <span class="gloss">A performance of pieces, presented one at a time. The brand releases its work the same way.</span>
         </div>
         <div class="root">
           <span class="label">The spelling</span>
@@ -301,11 +325,11 @@
       <div class="construct">
         <div class="wheel" id="wheel"></div>
         <ol class="steps">
-          <li><div><b>The keyed wheel.</b> The 26 letters sit around a circle, but not in alphabetical order. Each letter moves seven steps from the last, which shuffles the alphabet into the house's own sequence.</div></li>
+          <li><div><b>The keyed wheel.</b> The 26 letters sit around a circle, but not in alphabetical order. Each letter moves seven steps from the last, which shuffles the alphabet into the brand's own sequence.</div></li>
           <li><div><b>The path.</b> One stroke visits R, E, S, Y, T, A and L in turn, bowing toward the centre between letters. With seven letters on a seven-step wheel, the line draws a lyre, the oldest instrument of the recital.</div></li>
           <li><div><b>The terminals.</b> The line opens with a small ring and closes with a bar, the way hand-cut seals always have. The seven letters are marked in gold on the tick ring.</div></li>
           <li>
-            <div style="display:grid;gap:.5rem"><b>The house order.</b>
+            <div style="display:grid;gap:.5rem"><b>The brand's letter order.</b>
               <div class="keyrow" id="keyrow" aria-label="Alphabet in keyed wheel order"></div>
             </div>
           </li>
@@ -321,7 +345,7 @@
       <div class="sign-form">
         <span class="label">III · Sign a piece</span>
         <h2 id="h-sign">Everything you release gets its own seal.</h2>
-        <p>Type the name of a product, print, song or note. Its name is drawn in gold on the same wheel, over the faint lyre of the house, with its number in the ring.</p>
+        <p>Type the name of a product, print, song or note. Its name is drawn in gold on the same wheel, over the brand's faint lyre, with its number in the ring.</p>
         <form id="sign-form" class="sign-form" autocomplete="off">
           <div class="row">
             <div class="field">
@@ -354,10 +378,10 @@
 </section>
 
 <div class="wrap">
-  <section class="chapter" id="house" aria-labelledby="h-house">
+  <section class="chapter" id="programme" aria-labelledby="h-programme">
     <header><span class="roman">IV</span><span class="label">The programme</span></header>
     <div class="chapter-body">
-      <h2 id="h-house">A recital has a programme. So does the house.</h2>
+      <h2 id="h-programme">A recital has a programme. So does the brand.</h2>
       <p class="lede">You don't need to know yet what you'll make. The programme has one line for what you sell and one for what you share, and both count from the first piece.</p>
       <div class="ledger">
         <article>
@@ -378,7 +402,7 @@
           <p>Anything free: a post, a video, a thought, a look behind the scenes. Notes build the audience that the pieces later serve.</p>
           <ul>
             <li>Two-digit number, counted separately</li>
-            <li>Signed with the house mark in a corner</li>
+            <li>Signed with the brand mark in a corner</li>
             <li>A title that could stand alone</li>
           </ul>
         </article>
@@ -386,11 +410,11 @@
           <span class="label">Everywhere</span>
           <h3>The same hand</h3>
           <span class="form">@resytal</span>
-          <p>One handle, one avatar, one seal. Whichever platform people meet the work on, they meet the same house.</p>
+          <p>One handle, one avatar, one seal. Whichever platform people meet the work on, they meet the same brand.</p>
           <ul>
             <li>Avatar is always the lyre on oxblood</li>
             <li>Bio line: Each piece, signed.</li>
-            <li>Link goes to the house site</li>
+            <li>Link goes to your website</li>
           </ul>
         </article>
       </div>
@@ -456,7 +480,7 @@
           <li>No exclamation marks, no emoji, no countdowns. Scarcity is stated, never shouted.</li>
           <li>Numbers are exact: <span class="num">Nº 004</span>, forty made, ships 3 October.</li>
           <li>Things are "pieces" and "notes", never "content", "drops" or "merch".</li>
-          <li>Prices are shown plainly. The house does not run sales.</li>
+          <li>Prices are shown plainly. The brand does not run sales.</li>
           <li>Write like a letter to one person, not an announcement to a crowd.</li>
         </ul>
         <div>
@@ -512,7 +536,7 @@
         <figure class="piece w-post">
           <div class="post">
             <div class="pl">Note 01</div>
-            <div class="pq">Why a house, and not a shop: a shop sells things. A house keeps them.</div>
+            <div class="pq">Everything I make is numbered and signed, so you can follow the work from the very first piece.</div>
             <div class="pf"><span>RESYTAL</span><div data-seal="mark" data-ink="#3A0D14" data-metal="#9A7433"></div></div>
           </div>
           <figcaption><b>Shared post.</b> Signed in the corner.</figcaption>
@@ -535,18 +559,18 @@
         <label class="claim"><input type="checkbox" id="c-th"><span class="h">@resytal</span><span class="p">Threads</span></label>
         <label class="claim"><input type="checkbox" id="c-pin"><span class="h">resytal</span><span class="p">Pinterest</span></label>
         <label class="claim"><input type="checkbox" id="c-li"><span class="h">resytal</span><span class="p">LinkedIn page</span></label>
-        <label class="claim"><input type="checkbox" id="c-mail"><span class="h">house@resytal.com</span><span class="p">Email</span></label>
+        <label class="claim"><input type="checkbox" id="c-mail"><span class="h">hello@resytal.com</span><span class="p">Email</span></label>
         <label class="claim"><input type="checkbox" id="c-shop"><span class="h">resytal</span><span class="p">Shopify or Etsy</span></label>
         <label class="claim"><input type="checkbox" id="c-sub"><span class="h">resytal</span><span class="p">Substack notes</span></label>
         <label class="claim"><input type="checkbox" id="c-tm"><span class="h">RESYTAL</span><span class="p">Trademark search</span></label>
       </div>
-      <p class="note">If the .com is taken, prefer <span class="num">resytal.house</span> or <span class="num">houseofresytal.com</span>, and keep the handle identical on every platform.</p>
+      <p class="note">If the .com is taken, prefer <span class="num">resytal.co</span> or <span class="num">resytal.studio</span>, and keep the handle identical on every platform.</p>
     </div>
   </section>
 
   <footer class="colophon">
     <span class="mini">RESYTAL</span>
-    <span>House book, Edition II. Set in Marcellus and Hanken Grotesk.</span>
+    <span>Resytal brand kit. Set in Marcellus and Hanken Grotesk.</span>
   </footer>
 </div>
 
@@ -558,7 +582,7 @@
 
   document.getElementById('hero-seal').innerHTML = S.svg({ ink: IVORY, metal: GOLD });
 
-  // Wheel diagram: every letter at its keyed step, the house path on top.
+  // Wheel diagram: every letter at its keyed step, the brand path on top.
   (function drawWheel() {
     var house = {};
     S.letters(S.HOUSE).forEach(function (c) { house[c] = true; });

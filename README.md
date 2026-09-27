@@ -2,11 +2,11 @@
 
 **Each piece, signed.**
 
-Resytal (said "recital", Hebrew רסיטל) is a family house: one name for everything made, sold and shared, on every platform.
+Resytal (said "recital", Hebrew רסיטל) is a family brand: one name for everything made, sold and shared, on every platform.
 
 | File | What it is |
 | --- | --- |
-| `brand.html` | The house book: name, seal, colour, type, voice, mockups, and a checklist of handles to claim. Includes a live tool that seals any piece. |
+| `brand.html` | The brand kit: name, seal, colour, type, voice, mockups, and a checklist of handles to claim. Includes a live tool that seals any piece. |
 | `index.html` | The public website. Social bios link here. |
 | `assets/seal.js` | The seal generator. Browser and Node. |
 | `export/` | Ready-to-upload assets (see below). |
@@ -15,7 +15,7 @@ Resytal (said "recital", Hebrew רסיטל) is a family house: one name for ever
 ## The name
 
 - **The family:** Resytal is the family name in its Hebrew form, recital.
-- **The word:** a recital presents pieces one at a time, which is how the house releases its work.
+- **The word:** a recital presents pieces one at a time, which is how the brand releases its work.
 - **The spelling:** the S keeps the Hebrew sound, and the Y makes it ownable.
 - **Pronunciation:** officially "recital". Hebrew speakers say *reh-see-TAHL*, which is also correct. Bios read `RESYTAL · said "recital"`.
 
@@ -23,7 +23,7 @@ A web search found no consumer brand using the spelling Resytal. The only users 
 
 ## The seal
 
-The mark is the name written as one line on a **keyed letter wheel**. The 26 letters sit around a circle at step `(n × 7) mod 26`, which gives the house its own alphabet order:
+The mark is the name written as one line on a **keyed letter wheel**. The 26 letters sit around a circle at step `(n × 7) mod 26`, which gives the brand its own alphabet order:
 
 ```
 A P E T I X M B Q F U J Y N C R G V K Z O D S H W L
@@ -31,10 +31,10 @@ A P E T I X M B Q F U J Y N C R G V K Z O D S H W L
 
 A single stroke visits R → E → S → Y → T → A → L. It opens with a small ring and closes with a bar. Seven letters on a seven-step wheel draw a lyre.
 
-**Every piece gets its own seal.** The piece's name is drawn in gold on the same wheel, over the faint house lyre, with its number in the ring:
+**Every piece gets its own seal.** The piece's name is drawn in gold on the same wheel, over the brand's faint lyre, with its number in the ring:
 
 ```js
-ResytalSeal.svg()                                    // house seal
+ResytalSeal.svg()                                    // brand seal
 ResytalSeal.svg({ variant: 'mark' })                 // compact mark: avatars, favicons, corners
 ResytalSeal.svg({ item: 'Nightfall', edition: 1 })   // Piece Nº 001
 ResytalSeal.svg({ ink: '#3A0D14', metal: '#9A7433' })  // colours for ivory paper
@@ -52,7 +52,7 @@ node -e "console.log(require('./assets/seal.js').svg({item:'First Light',edition
 | --- | --- | --- |
 | For | Anything with a price | Anything free |
 | Numbering | `Nº 001`, three digits, never reused | `Note 01`, counted separately |
-| Mark | Its own seal from its own name | House mark in a corner |
+| Mark | Its own seal from its own name | Brand mark in a corner |
 | Rule | State the quantity | Give it a title that could stand alone |
 
 ## Colour
@@ -79,7 +79,7 @@ Both are free on Google Fonts under the SIL Open Font License. Copies used for e
 - No exclamation marks, no emoji, no countdowns. Scarcity is stated, never shouted.
 - Exact numbers: "Piece Nº 004. Forty made. Ships 3 October."
 - Use "pieces" and "notes". Never "content", "drops" or "merch".
-- Prices are shown plainly. The house does not run sales.
+- Prices are shown plainly. The brand does not run sales.
 - Write to one person, not to a crowd.
 
 ## Exports
